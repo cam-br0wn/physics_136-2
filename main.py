@@ -54,12 +54,23 @@ def force_vs_distance():
     print("A = " + str(math.exp(intercept)))
     print("B = " + str(slope))
 
+def generate_linear_regression(x, y, xlabel, ylabel, title, filename):
+    slope, intercept, r_value, p_value, std_err = linregress(x, y)
+    mn = np.min(x)
+    mx = np.max(x)
+    x1 = np.linspace(mn, mx, 500)
+    y1 = slope * x1 + intercept
+
+    fig = plt.figure()
+    plt.plot(x, y, 'ob')
+    plt.plot(x1, y1, '-r')
+    fig.suptitle(title, fontsize=20)
+    plt.xlabel(xlabel, fontsize=18)
+    plt.ylabel(ylabel, fontsize=18)
+    plt.savefig(filename)
 
 
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     charge_vs_force_on_charge()
     force_vs_distance()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
