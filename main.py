@@ -3,6 +3,24 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import linregress
 
+def charge_vs_force_on_charge():
+    charge_1 = [-10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10]
+    force_on_charge_2 = [-280.861, -224.689, -168.517, -112.344, -56.172, 0, 56.172, 112.344, 168.517, 224.689, 280.861]
+    slope, intercept, r_value, p_value, std_err = linregress(charge_1, force_on_charge_2)
+    print(slope)
+
+    mn = np.min(charge_1)
+    mx = np.max(charge_1)
+    x1 = np.linspace(mn, mx, 500)
+    y1 = slope * x1 + intercept
+
+    fig = plt.figure()
+    plt.plot(charge_1, force_on_charge_2, 'ob')
+    plt.plot(x1, y1, '-r')
+    fig.suptitle('Charge 1 vs. Force on Charge 2', fontsize=20)
+    plt.xlabel('Charge 1 (µC)', fontsize=16)
+    plt.ylabel('Force on Charge 2 (N)', fontsize=16)
+    plt.savefig('charge1_vs_F_charge2.png')
 
 def force_vs_distance():
     q1 = 5
@@ -41,6 +59,7 @@ def force_vs_distance():
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
+    charge_vs_force_on_charge()
     force_vs_distance()
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
